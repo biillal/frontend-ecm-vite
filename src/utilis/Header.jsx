@@ -91,7 +91,7 @@ function Header({ avtiveHeader }) {
         </div>
       </div>
 
-      <div className={`${open ? "bloc" : "hidden"} absolute mt-40 lg:mt-0 lg:container lg:mx-auto flex lg:justify-between justify-center items-center lg:py-5  lg:static flex-col lg:flex-row w-[100%]  `}>
+      <div className={`${open ? "bloc" : "hidden lg:block"} absolute mt-40 lg:mt-0 lg:container lg:mx-auto flex lg:justify-between justify-center items-center lg:py-5  lg:static flex-col lg:flex-row w-[100%]  `}>
         <div className=' '>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />} className='text-xl bg-blue-400 p-2 rounded-md' >

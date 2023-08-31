@@ -32,9 +32,9 @@ function Header({ avtiveHeader }) {
   return (
     <>
       <div className='fixed w-[100%] z-30 lg:static '>
-        <div className={`${open ? "h-screen" : "h-[12vh]"} bg-blue-400 transition-all lg:bg-white relative  lg:mx-0 lg:h-[30vh] `}>
+        <div className={`${open ? "h-screen" : "h-[12vh]"} shadow-md bg-blue-700 lg:shadow-none transition-all lg:bg-white relative  lg:mx-0 lg:h-[30vh] `}>
           <div className='flex justify-between container mx-auto items-center'>
-            <i class="ri-menu-line lg:hidden block text-xl" onClick={handleOpen}></i>
+            <i class="ri-menu-line lg:hidden block text-xl " onClick={handleOpen}></i>
             <div className=''>
               <Image src={logo} height='80px' />
             </div>
@@ -84,8 +84,8 @@ function Header({ avtiveHeader }) {
             </div>
             <div className=''>
               <div className='flex gap-1 justify-center hover:text-blue-400'>
-                <i class="ri-shopping-cart-2-fill text-2xl text-center"></i>
-                <Link to='/cart' className='text-2xl font-body '>My Cart</Link>
+                <i class="ri-shopping-cart-2-fill text-2xl text-center text-white lg:text-black"></i>
+                <Link to='/cart' className='text-2xl font-body text-white lg:text-black'>My Cart</Link>
               </div>
               <div className='ml-5'>
                 <span className='text-lg font-body'>(0) items-$0.00</span>
@@ -132,7 +132,7 @@ function Header({ avtiveHeader }) {
                 <NavBar active={avtiveHeader} />
               </div>
               <div className='flex gap-x-3 flex-col lg:flex-row gap-y-4 mt-5 lg:my-0'>
-                <Link to="/signin" className='flex border px-3 py-2 rounded-md bg-blue-400'>
+                <Link to="/signip" className='flex border px-3 py-2 rounded-md bg-blue-400'>
                   <i class="ri-user-fill text-2xl text-white"></i>
                   <Text className='text-xl font-body text-white'>Sing In </Text>
                 </Link>

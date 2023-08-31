@@ -34,7 +34,7 @@ function Header({ avtiveHeader }) {
   }
   const handleLogout = () =>{
     dispatch(logoutUser())
-    navigate('/signin')
+    navigate('/signip')
   }
   return (
     <>

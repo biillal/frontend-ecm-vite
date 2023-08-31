@@ -2,17 +2,18 @@ import { Avatar, Box, Button, Image, Menu, MenuButton, MenuDivider, MenuItem, Me
 import React, { useState } from 'react'
 import logo from '../assets/logo.png'
 import { data } from '../data/Data'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BellIcon, CheckCircleIcon, ChevronDownIcon } from '@chakra-ui/icons'
 import NavBar from '../components/NavBar'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutUser } from '../redux/apiCalls/authApiCalls'
 function Header({ avtiveHeader }) {
   const { user } = useSelector((state) => state.auth)
   const [searchTerm, setSearchTerm] = useState("")
   const [searchData, setSearchData] = useState(null)
   const [open, setOpen] = useState(false)
-  console.log(searchTerm);
-  console.log(searchData);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const handleSearchChange = (e) => {
     const term = e.target.value;
 
@@ -30,6 +31,10 @@ function Header({ avtiveHeader }) {
     setOpen((cuState) => {
       return !cuState
     })
+  }
+  const handleLogout = () =>{
+    dispatch(logoutUser())
+    navigate('/signin')
   }
   return (
     <>
@@ -147,7 +152,7 @@ function Header({ avtiveHeader }) {
                         <MenuList>
                           <Link to={`/profile/${user.user._id}`}><MenuItem>My Profile</MenuItem></Link>
                           <MenuDivider />
-                          <MenuItem >Logout</MenuItem>
+                          <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </MenuList>
                       </Menu>
                     </div>

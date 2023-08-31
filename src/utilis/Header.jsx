@@ -1,11 +1,13 @@
-import { Box, Button, Image, Menu, MenuButton, MenuItem, MenuList, StackDivider, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Button, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, StackDivider, Text, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import logo from '../assets/logo.png'
 import { data } from '../data/Data'
 import { Link } from 'react-router-dom'
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { BellIcon, CheckCircleIcon, ChevronDownIcon } from '@chakra-ui/icons'
 import NavBar from '../components/NavBar'
+import { useSelector } from 'react-redux'
 function Header({ avtiveHeader }) {
+  const { user } = useSelector((state) => state.auth)
   const [searchTerm, setSearchTerm] = useState("")
   const [searchData, setSearchData] = useState(null)
   const [open, setOpen] = useState(false)
@@ -132,26 +134,48 @@ function Header({ avtiveHeader }) {
                 <NavBar active={avtiveHeader} />
               </div>
               <div className='flex gap-x-3 flex-col lg:flex-row gap-y-4 mt-5 lg:my-0'>
-                <Link to="/signip" className='flex border px-3 py-2 rounded-md bg-blue-400'>
-                  <i class="ri-user-fill text-2xl text-white"></i>
-                  <Text className='text-xl font-body text-white'>Sing In </Text>
-                </Link>
-                <Link to="/signup" className='flex border px-3 py-2 rounded-md bg-blue-400'>
-                  <i class="ri-key-2-fill text-2xl text-white"></i>
-                  <Text className='text-xl font-body text-white'>Sing Up </Text>
-                </Link>
+                {
+                  user ? (
+                    <div>
+                      <Menu>
+                        <MenuButton as={Button} name={user.user.username} >
+                          <Box display='flex' gap='5px'>
+                            <Avatar size='sm' cursor='pointer' name={user.user.username} src={user.user.image.url} />
+                            <Text className='text-lg font-body font-bold'>{user.user.username} </Text>
+                          </Box>
+                        </MenuButton>
+                        <MenuList>
+                          <Link to={`/profile/${user.user._id}`}><MenuItem>My Profile</MenuItem></Link>
+                          <MenuDivider />
+                          <MenuItem >Logout</MenuItem>
+                        </MenuList>
+                      </Menu>
+                    </div>
+                  ) : (
+                    <>
+                      <Link to="/signip" className='flex border px-3 py-2 rounded-md bg-blue-400'>
+                        <i class="ri-user-fill text-2xl text-white"></i>
+                        <Text className='text-xl font-body text-white'>Sing In </Text>
+                      </Link>
+                      <Link to="/signup" className='flex border px-3 py-2 rounded-md bg-blue-400'>
+                        <i class="ri-key-2-fill text-2xl text-white"></i>
+                        <Text className='text-xl font-body text-white'>Sing Up </Text>
+                      </Link>
+                    </>
+                  )
+                }
               </div>
             </div>
           </div>
         </div>
       </div>
 
-          <br className='lg:hidden'/>
-          <br className='lg:hidden'/>
-          <br className='lg:hidden'/>
-          <br className='lg:hidden'/>
+      <br className='lg:hidden' />
+      <br className='lg:hidden' />
+      <br className='lg:hidden' />
+      <br className='lg:hidden' />
 
-          
+
     </>
   )
 }

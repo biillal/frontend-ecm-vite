@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { SingUpUser } from '../../redux/apiCalls/authApiCalls'
 import { RotatingLines } from 'react-loader-spinner'
-
+import swal from 'sweetalert'
 function SignUp() {
-    const  {loading,isverified} = useSelector((state)=>state.auth)
+    const { loading, registerMessage } = useSelector((state) => state.auth)
     const [show, setShow] = useState(false)
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -16,10 +16,18 @@ function SignUp() {
     const navigate = useNavigate()
     const handleSubmit = () => {
         dispatch(SingUpUser({ username, email, password, passwordConfirm }))
+        if (registerMessage) {
+            swal({
+                title: registerMessage,
+                icon: "success"
+            }).then(isOk => {
+                if (isOk) {
+                    navigate('/signip')
+                }
+            })
+        }
     }
-    if(isverified === true){
-       navigate('/signip')
-    }
+
     const handleClick = () => { setShow(!show) }
     return (
         <div className='w-[100%] bg-slate-100 h-screen flex items-center justify-center'>

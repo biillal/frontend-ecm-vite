@@ -17,9 +17,10 @@ const authSlice = createSlice({
       state.loading = false
     },
     register(state, action) {
-      state.isverified = true
-      state.user = action.payload
-      state.loading = false
+      state.registerMessage = action.payload
+    },
+    setIsVerified(state, action) {
+      state.isverified = false
     },
     setLoading(state, action) {
       state.loading = true
@@ -29,7 +30,12 @@ const authSlice = createSlice({
     },
     logout(state, action) {
       state.user = null
+      state.isverified = false
     },
+    setIsEmailVerified(state, action){
+      state.isEmailVerified = true
+      state.registerMessage = null
+    }
   }
 })
 

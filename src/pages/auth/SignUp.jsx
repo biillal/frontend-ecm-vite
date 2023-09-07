@@ -18,7 +18,7 @@ function SignUp() {
         dispatch(SingUpUser({ username, email, password, passwordConfirm }))
     }
     if(isverified === true){
-       navigate('/')
+       navigate('/signip')
     }
     const handleClick = () => { setShow(!show) }
     return (

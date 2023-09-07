@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { signinUser } from '../../redux/apiCalls/authApiCalls'
 import { RotatingLines } from 'react-loader-spinner'
-
+import swal from 'sweetalert'
 function SignIn() {
-  const { loading, isverified } = useSelector((state) => state.auth)
+  const { loading, registerMessage } = useSelector((state) => state.auth)
 
   const [show, setShow] = useState(false)
   const [email, setEmail] = useState('')
@@ -16,10 +16,18 @@ function SignIn() {
   const navigate = useNavigate()
   const handleSubmit = () => {
     dispatch(signinUser({ email, password }))
+    if(registerMessage){
+      swal({
+        title: registerMessage,
+        icon: "success"
+      }).then(isOk =>{
+        if(isOk){
+          navigate('/signip')
+        }
+      })
+    }
   }
-  if (isverified === true) {
-    navigate('/')
-  }
+
   const handleClick = () => { setShow(!show) }
   return (
     <div className='w-[100%] bg-slate-100 h-screen flex items-center justify-center'>

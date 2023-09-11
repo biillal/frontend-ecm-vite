@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, StackDivider, Text, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../assets/logo.png'
 import { data } from '../data/Data'
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,8 +7,10 @@ import { BellIcon, CheckCircleIcon, ChevronDownIcon } from '@chakra-ui/icons'
 import NavBar from '../components/NavBar'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../redux/apiCalls/authApiCalls'
+import { getAllCategories } from '../redux/apiCalls/categoryApiCalls'
 function Header({ avtiveHeader }) {
   const { user } = useSelector((state) => state.auth)
+  const { categories } = useSelector((state) => state.category)
   const [searchTerm, setSearchTerm] = useState("")
   const [searchData, setSearchData] = useState(null)
   const [open, setOpen] = useState(false)
@@ -27,19 +29,23 @@ function Header({ avtiveHeader }) {
     }
   }
 
+
   const handleOpen = () => {
     setOpen((cuState) => {
       return !cuState
     })
   }
-  const handleLogout = () =>{
+  const handleLogout = () => {
     dispatch(logoutUser())
     navigate('/signip')
   }
+  useEffect(() => {
+    dispatch(getAllCategories())
+  }, [])
   return (
     <>
       <div className='fixed w-[100%] z-30 lg:static '>
-        <div className={`${open ? "h-screen" : "h-[12vh]"} shadow-md bg-blue-700 lg:shadow-none transition-all lg:bg-white relative  lg:mx-0 lg:h-[30vh] `}>
+        <div className={`${open ? "h-screen" : "h-[12vh]"}  shadow-md bg-blue-700 lg:shadow-none z-50 transition-all lg:bg-white relative  lg:mx-0 lg:h-[30vh] `}>
           <div className='flex justify-between container mx-auto items-center'>
             <i class="ri-menu-line lg:hidden block text-xl " onClick={handleOpen}></i>
             <div className=''>
@@ -100,7 +106,7 @@ function Header({ avtiveHeader }) {
             </div>
           </div>
 
-          <div className='bg-blue-500 sticky top-0 w-[100%]  '>
+          <div className='bg-blue-500  top-0 w-[100%] z-40 '>
             <div className={`${open ? "bloc" : "hidden lg:flex"} absolute mt-24 lg:mt-0 lg:container lg:mx-auto flex lg:justify-between justify-center items-center lg:py-5  lg:static  lg:flex-row flex-col w-[100%]  `}>
               <div className=' '>
                 <Menu>
@@ -108,37 +114,32 @@ function Header({ avtiveHeader }) {
                     Categories
                   </MenuButton>
                   <MenuList className='bg-blue-500  rounded-md'>
-                    <MenuItem minH='48px' className=''>
-                      <Link to='/category/1' className='flex hover:bg-blue-300 px-3 py-2'>
-                        <Image
-                          boxSize='2rem'
-                          borderRadius='full'
-                          src='https://placekitten.com/100/100'
-                          alt='Fluffybuns the destroyer'
-                          mr='12px'
-                        />
-                        <span>Fluffybuns the Destroyer</span>
-                      </Link>
-                    </MenuItem>
-                    <MenuItem minH='40px'>
-                      <Link to='/category/1' className='flex hover:bg-blue-300 px-3 py-2 w-full'>
-                        <Image
-                          boxSize='2rem'
-                          borderRadius='full'
-                          src='https://placekitten.com/120/120'
-                          alt='Simon the pensive'
-                          mr='12px'
-                        />
-                        <span>Simon the pensive</span>
-                      </Link>
-                    </MenuItem>
+                    {
+                      categories.map((cat) => {
+                        return (
+                          <MenuItem minH='48px' className=''>
+                            <Link to={`category/${cat._id}`} className='flex w-[100%] px-3 py-2'>
+                              <Image
+                                boxSize='2rem'
+                                borderRadius='full'
+                                src={cat.image.url}
+                                alt='Fluffybuns the destroyer'
+                                mr='12px'
+                              />
+                              <span>{cat.name}</span>
+                            </Link>
+                          </MenuItem>
+                        )
+                      })
+                    }
+
                   </MenuList>
                 </Menu>
               </div>
               <div className='flex flex-col'>
                 <NavBar active={avtiveHeader} />
               </div>
-              <div className='flex gap-x-3 flex-col lg:flex-row gap-y-4 mt-5 lg:my-0'>
+              <div className='flex gap-x-3 flex-col lg:flex-row gap-y-4 mt-5 lg:my-0 z-50'>
                 {
                   user ? (
                     <div>

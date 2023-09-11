@@ -16,7 +16,7 @@ function SignUp() {
     const navigate = useNavigate()
     const handleSubmit = () => {
         dispatch(SingUpUser({ username, email, password, passwordConfirm }))
-        if (registerMessage) {
+        if (registerMessage != null) {
             swal({
                 title: registerMessage,
                 icon: "success"

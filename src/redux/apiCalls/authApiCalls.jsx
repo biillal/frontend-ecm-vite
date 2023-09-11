@@ -7,9 +7,10 @@ export function SingUpUser(user) {
     return async (dispatch, getState) => {
         try {
             dispatch(authActions.setLoading())
-            const { data } = await axios.post('http://localhost:5000/api/auth/signup', user)
+            const { data } = await axios.post('https://e-commerce-ab.onrender.com/api/auth/signup', user)
             dispatch(authActions.clearLoading())
-            dispatch(authActions.register(data))
+            console.log(data.message);
+            dispatch(authActions.register(data.message))
 
         } catch (error) {
             console.log(error)
@@ -23,7 +24,7 @@ export function signinUser(user) {
     return async (dispatch, getState) => {
         try {
             dispatch(authActions.setLoading())
-            const { data } = await axios.post('http://localhost:5000/api/auth/signIn', user)
+            const { data } = await axios.post('https://e-commerce-ab.onrender.com/api/auth/signIn', user)
             alert(data.message)
             dispatch(authActions.clearLoading())
             dispatch(authActions.login(data))
@@ -50,11 +51,12 @@ export function logoutUser() {
 export function verifyEmail(userId,token) {
     return async (dispatch, getState) => {
         try {
-            const { data } = await axios.get(`http://localhost:5000/api/auth/${userId}/verify/${token}`)
+            console.log(userId,token);
+            await axios.get(`https://e-commerce-ab.onrender.com/api/auth/${userId}/verify/${token}`)
             dispatch(authActions.setIsEmailVerified())
 
         } catch (error) {
-            alert(error.response.data.errors[0].msg)
+            console.log(error);
             dispatch(authActions.clearLoading())
         }
     }

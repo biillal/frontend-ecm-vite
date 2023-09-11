@@ -69,7 +69,7 @@ function SignIn() {
               </InputRightElement>
             </InputGroup>
           </FormControl>
-          <Link to='' className='text-end mt-2'>Forogt password ?</Link>
+          <Link to='/forgot-password' className='text-end mt-2'>Forogt password ?</Link>
           <Button
             onClick={handleSubmit}
             colorScheme='blue'

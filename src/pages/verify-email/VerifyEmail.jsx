@@ -7,9 +7,10 @@ function VerifyEmail() {
   const dispatch = useDispatch()
   const {isEmailVerified} = useSelector((state=>state.auth))
   const {userId,token} = useParams()
+  console.log(userId,token);
   useEffect(()=>{
     dispatch(verifyEmail(userId,token))
-  },[userId,token])
+  },[])
   return (
     <div className=''>
       {

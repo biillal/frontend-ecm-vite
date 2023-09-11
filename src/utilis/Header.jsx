@@ -44,8 +44,8 @@ function Header({ avtiveHeader }) {
   }, [])
   return (
     <>
-      <div className='fixed w-[100%] z-30 lg:static '>
-        <div className={`${open ? "h-screen" : "h-[12vh]"}  shadow-md bg-blue-700 lg:shadow-none z-50 transition-all lg:bg-white relative  lg:mx-0 lg:h-[30vh] `}>
+      <div className='fixed w-[100%]  z-30 lg:static '>
+        <div className={`${open ? "h-screen" : "h-[12vh]"}  shadow-md bg-blue-700 lg:shadow-none z-50 transition-all lg:bg-white relative  lg:mx-0 lg:h-[24vh] `}>
           <div className='flex justify-between container mx-auto items-center'>
             <i class="ri-menu-line lg:hidden block text-xl " onClick={handleOpen}></i>
             <div className=''>

@@ -1,5 +1,7 @@
 
-
+.App{
+  background: rgb(239, 239, 239);
+}
 
 ::-webkit-scrollbar{
   width: 6px;

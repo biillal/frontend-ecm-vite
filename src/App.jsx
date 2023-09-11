@@ -13,7 +13,7 @@ import ForgotPassword from './pages/auth/ForgotPassword'
 function App() {
   const { user } = useSelector((state) => state.auth)
   return (
-    <>
+    <div className='App'>
 
       <BrowserRouter>
         <ToastContainer />
@@ -26,7 +26,7 @@ function App() {
           <Route path='/forgot-password' element={<ForgotPassword/>}/>
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   )
 }
 

@@ -5,9 +5,9 @@ function EventCard() {
   return (
     <div className={`w-full block bg-white rounded-lg lg:flex p-2`}>
         <div className='w-full lg:w-[50%] m-auto '>
-            <img src='https://cdn7.ouedkniss.com/1600/medias/announcements/images/vwLoV/aFIhvAQyq7yuZY8CVR2uHjwHjvfNP4yBa9X3Hc3N.jpg' alt=''/>
+            <img className='h-[450px] ' src='https://cdn7.ouedkniss.com/1600/medias/announcements/images/vwLoV/aFIhvAQyq7yuZY8CVR2uHjwHjvfNP4yBa9X3Hc3N.jpg' alt=''/>
         </div>
-        <div className='w-full lg:w-[50%] flex flex-col justify-center '>
+        <div className='w-full lg:w-[50%] flex flex-col justify-center gap-y-7'>
             <h2 className={`text-[25px] font-[600] font-body text-[#333]`}>Iphone 14pro max 8/25gb</h2>
             <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente officia, ipsum magnam amet quos odio fugiat, necessitatibus reprehenderit neque ut doloribus ipsa vel consequatur repudiandae dignissimos saepe voluptas nostrum sed!

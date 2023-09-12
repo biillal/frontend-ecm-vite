@@ -8,7 +8,6 @@ function NavBar({active}) {
         <div className='flex flex-col lg:flex-row gap-y-6 mt-3 lg:mt-0'>
             {
                 navItem && navItem.map((i, index) => {
-                    console.log(index)
                     return (
                         <div className='flex'>
                             

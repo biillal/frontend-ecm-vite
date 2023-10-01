@@ -6,7 +6,7 @@ export function createCategory(cat) {
     return async (dispatch, getState) => {
         try {
             dispatch(categoryActions.setLoading())
-            const { data } = await axios.post('https://e-commerce-ab.onrender.com/api/categories', { cat }, {
+            const { data } = await axios.post('http://localhost:5000/api/categories', { cat }, {
                 headers: {
                     Authorization: "Bearer " + getState().auth.user.token,
                     "Content-Type" : "multipart/form-data"
@@ -23,7 +23,7 @@ export function createCategory(cat) {
 export function getAllCategories() {
     return async (dispatch, getState) => {
         try {
-            const { data } = await axios.get('https://e-commerce-ab.onrender.com/api/categories')
+            const { data } = await axios.get('http://localhost:5000/api/categories')
             dispatch(categoryActions.setGetCategories(data.data))
         } catch (error) {
             alert(error.response.data.errors[0].msg)
